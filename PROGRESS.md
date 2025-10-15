@@ -7,6 +7,7 @@
 - Created GitHub repo for tracking progress
 - Revised Typescript Basics(types, interfaces, functions)
 - Watched "What the heck is the event loop anyway?" by Philip Roberts
+- Reviewed OWASP Top 10 - familiar with common vulnerabilities
 
 ### Key Learnings - Event Loop:
 1. Don't block the event loop with sluggish and long-time taking operations like image processing or animation
