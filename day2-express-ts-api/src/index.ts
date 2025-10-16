@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from 'express'
 import dotenv from 'dotenv'
 import {config} from './config'
 import userRoutes from './routes/user.routes'
+import authRoutes from './routes/auth.routes'
 import { requestLogger } from './middlewares/logger'
 import { errorHandler, notFoundHandler } from './middlewares/errorHandler'
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(requestLogger);
 
 app.use('/api/users', userRoutes)
+app.use('/api/auth', authRoutes)
 
 app.get('/', (req: Request, res: Response) => {
     res.json({
