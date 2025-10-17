@@ -1,10 +1,4 @@
-export interface AuthUser {
-    id: number
-    name: string
-    email: string
-    password: string
-    createdAt: Date
-}
+import {User} from '@prisma/client'
 
 export interface RegisterRequest {
     name: string
@@ -20,11 +14,7 @@ export interface LoginRequest {
 export interface AuthResponse {
     success: boolean
     token?: string
-    user?: {
-        id: number
-        name: string
-        email: string
-    }
+    user?: Omit<User, 'password'>
     message: string
 }
 

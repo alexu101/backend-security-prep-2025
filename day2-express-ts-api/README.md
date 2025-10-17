@@ -5,10 +5,14 @@
 - Password hashing with bcrypt
 - Protected routes
 - User registration and login
+- PostgreSQL database with PRISMA ORM
+- Database migrations
+- Type-safe database queries
 
 ## Techonologies
 - **bcryptjs** - Password hashing
 - **jsonwebtoken** - JWT tokens
+- **Prisma** - Type-safe ORM
 
 ## API Endpoints
 ### User management
@@ -62,3 +66,19 @@ This API uses JWT (JSON Web Tokens) for authentication.
 1. Register: `POST /api/auth/register`
 2. Or Login: `POST /api/auth/login`
 3. Use the returned token in subsequent requests.
+
+## Database Setup:
+
+### Prerequisites
+- PostgreSQL installed locally OR
+- Free PostgreSQL instance (Supabase, Neon, etc.)
+
+### Setup Steps
+1. Create a PostgreSQL database
+2. Update `DATABASE_URL` IN `.env`
+3. Run migrations:
+    bash
+    npx prisma migrate dev
+4. View database:
+    bash
+    npx prisma studio

@@ -1,38 +1,53 @@
-import { AuthUser } from "../types/auth.types";
+import { User } from "@prisma/client";
+import prisma from "../config/database";
 
-// In memory DB (to be replaced with a real one)
-let authUsers: AuthUser[] = []
-let nextId = 1;
-
-export const findUserByEmail = (email: string): AuthUser | undefined => {
-    return authUsers.find(u => u.email.toLowerCase() === email.toLowerCase())
+export const findUserByEmail = async (email: string): Promise<User | null> => {
+    return await prisma.user.findUnique({
+        where: {email: email.toLowerCase()}
+    })
 }
 
-export const findUserById = (id: number): AuthUser | undefined => {
-    return authUsers.find(u => u.id === id)
+export const findUserById = async (id: number): Promise<User | null> => {
+    return await prisma.user.findUnique({
+        where: {id: id}
+    })
 }
 
-export const createAuthUser = (
+export const createAuthUser = async (
     name: string,
     email: string,
     hashedPassword: string
-): AuthUser => {
-    const newUser: AuthUser = {
-        id: nextId++,
-        name,
-        email,
-        password: hashedPassword,
-        createdAt: new Date()
-    }
-
-    authUsers.push(newUser);
-
-    return newUser
+): Promise<User> => {
+    return await prisma.user.create({
+        data:{
+            name,
+            email: email.toLowerCase(),
+            password: hashedPassword
+        }
+    })
 }
 
-export const getAllAuthUsers = (): AuthUser[] => authUsers
+export const getAllAuthUsers = async (): Promise<User[]> => {
+    return await prisma.user.findMany({
+        orderBy: {createdAt: 'desc'}
+    })
+}
 
-export const sanitizeUser = (user: AuthUser) => {
-    const {password, ...userWithoutPassword} = user
-    return userWithoutPassword
+export const updateAuthUser = async (
+    id: number,
+    data: {name?: string, email?: string}
+): Promise<User> => {
+    return await prisma.user.update({
+        where: {id},
+        data: {
+            ...(data.name && {name: data.name}),
+            ...(data.email && {email: data.email})
+        }
+    })
+}
+
+export const deleteAuthUser = async (id: number): Promise<User> => {
+    return await prisma.user.delete({
+        where: {id}
+    })
 }

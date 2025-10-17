@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { createAuthUser, findUserByEmail, sanitizeUser } from "../models/authUser.model";
+import { createAuthUser, findUserByEmail} from "../models/authUser.model";
 import { comparePassword, generateToken, hashPassword } from "../utils/utils";
-import { AuthResponse, AuthUser } from "../types/auth.types";
+import { AuthResponse} from "../types/auth.types";
 import { AppError } from "../middlewares/errorHandler";
 
 export const register = async (
@@ -12,13 +12,13 @@ export const register = async (
     try{
         const {name, email, password} = req.body
 
-        const existingUser = findUserByEmail(email)
+        const existingUser = await findUserByEmail(email)
         if(existingUser){
             throw new AppError('User with this email already exists', 400)
         }
 
         const hashedPassword = await hashPassword(password)
-        const newUser = createAuthUser(name, email, hashedPassword)
+        const newUser = await createAuthUser(name, email, hashedPassword)
 
         const token = generateToken({
             userId: newUser.id,
@@ -28,12 +28,16 @@ export const register = async (
         const response: AuthResponse = {
             success: true,
             token,
-            user: sanitizeUser(newUser),
+            user: newUser,
             message: 'User registered successfully'
         }
 
         res.status(201).json(response)
     } catch(error) {
+        if (error instanceof Error){
+            console.error('Database error: ', error.message)
+            throw new AppError('Registration failed', 500)
+        }
         next(error)
     }
 }
@@ -46,7 +50,7 @@ export const login = async (
     try{
         const {email, password} = req.body
 
-        const user = findUserByEmail(email)
+        const user = await findUserByEmail(email)
         if(!user){
             throw new AppError('Invalid credentials', 401)
         }
@@ -63,7 +67,7 @@ export const login = async (
 
         const response: AuthResponse = {
             success: true,
-            user: sanitizeUser(user),
+            user: user,
             message: 'Logged in successfuly',
             token
         }
@@ -84,14 +88,14 @@ export const getCurrentUser = async (
             throw new AppError('User not authorized', 402)
         }
 
-        const currentUser = findUserByEmail(req.user.email)
+        const currentUser = await findUserByEmail(req.user.email)
         if (!currentUser){
             throw new AppError('User not found', 404)
         }
 
         const response = {
             success: true,
-            data: sanitizeUser(currentUser)
+            data: currentUser
         }
 
         res.status(201).json(response)

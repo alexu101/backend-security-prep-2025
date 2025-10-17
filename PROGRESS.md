@@ -39,3 +39,49 @@
 ### What I Built:
 A production-ready REST API with 5 user endpoints, custom error classes,
 validation schemas, and proper TypeScript types throughout.
+
+## Day 3
+
+### Completed:
+- Added JWT authentication system
+- Implemented user registration with password hashing (using bcrypt)
+- Built login and register endpoints with token generation
+- Created authentication middleware for protected routes
+- Added data validation
+- Protected sensitive user routes (CRUD)
+- Tested all auth flows
+
+### Key Learnings:
+- JWT tokens store user identity securely
+- bcrypt hasing is one-way(can't decrypt, only compare)
+- Middleware can modify request objects
+- Authentication vs Authorization
+- Never send passwors in responses (sanitize user objects)
+
+### What I built
+Complete authentication system with secure user registration, protected routes and auth middleware
+
+## Day 4
+- Integrated PostgreSQL database with Prisma ORM
+- Created database schema and migrations
+- Replaced in-memory storage with real database
+- Updated all auth operations to use async database calls
+- Added proper error handling for database operations
+- Tested full auth flow with persistent storage
+- Users now persists across server restarts
+
+### Key Learnings:
+- Prisma makes TS + db work beautifully
+- Migrations track database changes over time
+- Async/await with database requires careful error handling
+- Type safety extends all the way to the database layer
+- Prisma Studio is amazing for visualizing data
+- Understanding difference between ORM and raw SQL
+
+### What I Built:
+Converted in-memory API to production-ready database-backend system:
+- Full Prisma setup with migrations
+- Type-safe database queries
+- Persistent user authentication
+- Database connection management
+- Error handling for database failures
