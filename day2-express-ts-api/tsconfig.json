@@ -10,6 +10,7 @@
     "module": "CommonJS",
     "target": "ES2020",
     "types": [],
+
     // For nodejs:
     // "lib": ["esnext"],
     // "types": ["node"],
@@ -34,6 +35,7 @@
 
     // Recommended Options
     "esModuleInterop": true,
+    "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "jsx": "react-jsx",

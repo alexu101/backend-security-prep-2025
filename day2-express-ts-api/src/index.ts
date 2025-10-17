@@ -5,6 +5,11 @@ import userRoutes from './routes/user.routes'
 import authRoutes from './routes/auth.routes'
 import { requestLogger } from './middlewares/logger'
 import { errorHandler, notFoundHandler } from './middlewares/errorHandler'
+import { ApolloServer } from '@apollo/server'
+import { resolvers } from './graphql/resolvers'
+import { typeDefs } from './graphql/schema'
+import { expressMiddleware } from '@apollo/server/express4';
+import { verifyToken } from './utils/utils'
 
 dotenv.config()
 
@@ -17,6 +22,36 @@ app.use(requestLogger);
 
 app.use('/api/users', userRoutes)
 app.use('/api/auth', authRoutes)
+
+const apolloServer = new ApolloServer({
+    typeDefs,
+    resolvers
+});
+
+(async () => {
+    await apolloServer.start()
+})()
+
+app.use(
+    '/graphql',
+    expressMiddleware(apolloServer, {
+        context: async ({req}: {req: Request}) => {
+            const authHeader = req.headers.authorization || ''
+            if(authHeader.startsWith('Bearer ')){
+                try{
+                    const token = authHeader.split(' ')[1]
+                    const decoded = verifyToken(token!)
+                    return {user: decoded}
+                } catch (error) {
+                    return {}
+                }
+            }
+
+            return {}
+        }
+    })
+)
+
 
 app.get('/', (req: Request, res: Response) => {
     res.json({
