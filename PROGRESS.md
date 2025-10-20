@@ -61,7 +61,7 @@ validation schemas, and proper TypeScript types throughout.
 ### What I built
 Complete authentication system with secure user registration, protected routes and auth middleware
 
-## Day 4
+## Day 4 & 5
 - Integrated PostgreSQL database with Prisma ORM
 - Created database schema and migrations
 - Replaced in-memory storage with real database
@@ -85,3 +85,16 @@ Converted in-memory API to production-ready database-backend system:
 - Persistent user authentication
 - Database connection management
 - Error handling for database failures
+
+## Day 6
+### Completed:
+
+- Completed OWASP Top 10 security vulnerabilities study
+- Detailed notes on all 10 with examples and prevention
+- Applied each to broker-investor platform context
+
+### Key Learnings:
+- Security is complex but follows patterns
+- Access control (#1), crypto, injection are critical
+- Prevention = validation + proper architecture + monitoring
+- I already prevent some of these (injection via input validation)
