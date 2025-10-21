@@ -52,4 +52,56 @@ Its a non profit foundation that works to improve the security of the software, 
         - Use specialists
    - Real scenario: The broker invest web platform takes smaller fee for orders lower than 100$. An user could spam hundreds of requests with amounts lower than 100$ and this will produce massive losses for the company.
 
-# A05
+# A05 Security Misconfiguration
+   - What: Security risk that happens when the application is missing appropiate security policies/configurations, unnecessary features are enabled, error handling offers too much details.
+   - Example: Directory listing is not disabled on the server. An attacker discovers this and downloads all compiled JAVA classes. With reverse engineering he can discover severe access control flaw.
+   - Prevention:
+        - A minimal platform without unused features 
+        - An automatied process to verify the effectivenes of the configurations
+        - Review all permissions and policies
+   - Real scenario: Broker investment application implementation sends too descriptive error traces and messages. This exposes underlying info.
+
+# A06 Vulnerable Imports
+   - What: Security risk that appears when you are using outdated and vulnerable dependencies, software etc. and when you do not scan for vulnerabilites regularly.
+   - Example: Attackers found bugs in libraries and then exploit apps that are using those libraries
+   - Prevention:
+        - Remove unused dependencies, unnecessary features, files and documentation.
+        - Only use components from official sources.
+        - Monitor list of dependencies/components used versions
+   - Real scenario: Let's say the Broker Invest is using an library that contain a bug that let attackers run code remotely on the server.
+
+# A07 Identification and Authentication Failures
+   - What: Security risk that appears when the application fails authenticating users action and permits automated attacks, brute force attacks, permits weak passwords, has missing or ineffective mfa, exposes session identifier in URL, reuse session identifiers, etc.
+   - Example: Application has not enabled MFA and if the users are using simple passwords (even if they are needed to be changed, users will use just 2 or 3 passwords and the rotation will be the same), and in that way the attacker can exploit this
+   - Prevention:
+        - Enforce MFA
+        - Use strong password complexity and rotation policies
+   - Real scenario: User's simple passwords can be guessed by attackers and access their investment accounts
+
+# A08 - Software and Data Integrity Failures
+   - What: Security risk that happens when relying on untrusted and unsafe plugins and libraries. App trust external code without checking if its safe or authentic.
+   - Example: Attackers compromise a trusted dependency you install or update it, unkowingly importing malicious code
+   - Prevention: Verify integrity, use trusted resources
+   - Real scenario: Broker invest app uses a library from an unsafe source.
+
+# A09 - Security Logging and Monitoring Features
+1. A01: Broken Access Control
+   - What: Security risk that happends due to insufficient security logging so you will not know when or if you're being attacked or if you already been breached.
+   - Example: Login brute force not logged, logs stored locally can be easily deleted etc.
+   - Prevention:
+        - Store logs remotely
+        - Log security events, acess attempts, input validation, failed ops etc.
+        - Good Retention Policy
+        - Don't log sensitive data
+   - Real scenario: The broker invest app logging mechanism is not well made so an attacker can brute force the login mechanism.
+
+# A10 - Server-Side Request Forgery (SSRF)
+   - What: Security risk that happens when the app fetches an URL provided by the user and the attacker tricks the server into making requests to internal or protected systems instead of external ones
+   - Example: Attacker sends requests to internal data/metadata
+   - Prevention: 
+        - Input validation
+        - Metadata protection
+        - Restrict outbound traffic from servers that don't need it
+        - Block private IPs
+        - Allowlist only
+   - Real scenario: Broker app is open to everyone
