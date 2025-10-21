@@ -56,7 +56,7 @@ Its a non profit foundation that works to improve the security of the software, 
    - What: Security risk that happens when the application is missing appropiate security policies/configurations, unnecessary features are enabled, error handling offers too much details.
    - Example: Directory listing is not disabled on the server. An attacker discovers this and downloads all compiled JAVA classes. With reverse engineering he can discover severe access control flaw.
    - Prevention:
-        - A minimal platform without unused features 
+        - A minimal platform without unused features
         - An automatied process to verify the effectivenes of the configurations
         - Review all permissions and policies
    - Real scenario: Broker investment application implementation sends too descriptive error traces and messages. This exposes underlying info.
@@ -85,7 +85,6 @@ Its a non profit foundation that works to improve the security of the software, 
    - Real scenario: Broker invest app uses a library from an unsafe source.
 
 # A09 - Security Logging and Monitoring Features
-1. A01: Broken Access Control
    - What: Security risk that happends due to insufficient security logging so you will not know when or if you're being attacked or if you already been breached.
    - Example: Login brute force not logged, logs stored locally can be easily deleted etc.
    - Prevention:
@@ -98,7 +97,7 @@ Its a non profit foundation that works to improve the security of the software, 
 # A10 - Server-Side Request Forgery (SSRF)
    - What: Security risk that happens when the app fetches an URL provided by the user and the attacker tricks the server into making requests to internal or protected systems instead of external ones
    - Example: Attacker sends requests to internal data/metadata
-   - Prevention: 
+   - Prevention:
         - Input validation
         - Metadata protection
         - Restrict outbound traffic from servers that don't need it
