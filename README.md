@@ -13,13 +13,13 @@ Intensive preparation for Senior Backend Developer role with focus on **backend 
   - Error handling middleware
   - Production-ready architecture
 
-- **Day 3: JWT Authentication System**
+- **Day 3: JWT Authentication System** (in day 2 repo)
   - Secure password hashing with bcrypt
   - JWT token generation and verification
   - Protected routes with auth middleware
   - Role-based access control patterns
 
-- **Day 4: PostgreSQL Database Integration**
+- **Day 4: PostgreSQL Database Integration**(in day 2 repo)
   - Prisma ORM for type-safe queries
   - Database migrations
   - Secure database architecture
