@@ -98,3 +98,17 @@ Converted in-memory API to production-ready database-backend system:
 - Access control (#1), crypto, injection are critical
 - Prevention = validation + proper architecture + monitoring
 - I already prevent some of these (injection via input validation)
+
+## Day 7 - Tuesday
+
+### Completed:
+Deep dive OWASP Top 3 (Access Control, Injection, Auth)
+Practiced explaining concepts in writing
+Wrote interview-style answers
+Identified areas for polish (code examples, grammar)
+
+### Key Learnings:
+- Can explain security concepts clearly
+- Understand defense-in-depth approach
+- Need to practice code examples more
+- Getting more comfortable with security topics
