@@ -1,4 +1,4 @@
-# Day 2: Express & TS project
+# Express & TS project
 
 ## Features
 - JWT Authentication
